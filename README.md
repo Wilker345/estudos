@@ -1,2 +1,2 @@
 # estudos
-Um repositório com algoritmos simples preparados com antecedência 
+Um repositório com códigos feitos durante estudos
