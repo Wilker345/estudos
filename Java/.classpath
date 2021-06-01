@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="semana3/AtividadeVisibilidadeEncapsulamento/|semana2/|semana3/AtividadeOperadoresESintaxeParte3/" kind="src" path=""/>
+	<classpathentry kind="src" path="semana2"/>
+	<classpathentry kind="src" path="semana3/AtividadeOperadoresESintaxeParte3"/>
+	<classpathentry kind="src" path="semana3/AtividadeVisibilidadeEncapsulamento"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
