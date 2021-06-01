@@ -1,0 +1,3 @@
+//Quais as vantagens da compilação separada em C? Crie um exemplo que ilustre o uso de bibliotecas em C e o Makefile. Você deve criar pelo menos uma biblioteca.
+
+//Assim como outras funcionalidades em C, o propósito é eficiência. Evitar custos sobre o sistema, aumentar a velocidade, permitindo a utilização de variáveis, funções e laços de repetição em quantidades mínimas, enquanto permite ao programador corrigir/modificar e recompilar programas de várias etapas (diversos arquivos e bibliotecas por ex) com mais facilidade, evitando ter que alterar grandes extensões do código de forma manual.
