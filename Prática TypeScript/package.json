@@ -1,0 +1,27 @@
+{
+  "name": "estudos",
+  "version": "1.0.0",
+  "description": "Um repositório com códigos feitos durante estudos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wilker345/estudos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wilker345/estudos/issues"
+  },
+  "homepage": "https://github.com/Wilker345/estudos#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "eslint": "^7.32.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
