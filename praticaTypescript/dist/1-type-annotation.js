@@ -1,15 +1,15 @@
 "use strict";
 /* eslint-disable */
-var nome = 'Carlos';
-var idade = 30;
-var adulto = true;
-var simbolo = Symbol('qualquer-symbol');
+let nome = 'Carlos';
+let idade = 30;
+let adulto = true;
+let simbolo = Symbol('qualquer-symbol');
 //let big: bigint = 10n;
 //Arrays
-var arrayDeNumeros = [1, 2, 3];
-var arrayDeNumeros2 = [4, 5, 6];
+let arrayDeNumeros = [1, 2, 3];
+let arrayDeNumeros2 = [4, 5, 6];
 //Objetos
-var pessoa = {
+let pessoa = {
     nome: 'João',
     idade: 22
 }; //Ao colocar '?' você deixa um atributo opcional
@@ -17,4 +17,4 @@ var pessoa = {
 function soma(x, y) {
     return x + y; //a linguagem pré-determinou um retorno do tipo number
 }
-var soma2 = function (x, y) { return x + y; };
+const soma2 = (x, y) => x + y;
