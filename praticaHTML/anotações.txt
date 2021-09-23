@@ -1,0 +1,26 @@
+Na forma mais simples, o arquivo .html é dividido em "tags" de head(dita o comportamento da página) e
+body(ocmposição da página):
+
+<!DOCTYPE html>
+<html lang="en"> // Idioma do conteúdo da página
+<head>
+  <meta charset="UTF-8">  // padrão do alfabeto, UTF-8 é o latim, com acentos e etc
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>  // Nome da página na aba do navegador
+</head>
+<body>
+
+</body>
+</html>
+
+Títulos são representados por <h1><\h1>, <h2><\h2>, etc, de forma hierárquica.
+Eles podem ser agrupados com <hgroup><\hgroup>
+
+Parágrafos podem ser separados por <p><\p> e  quebras de linhas podem usar o '&shy;' para dividir a palavra por
+hífens caso seja necessário na visualização do site, enquanto o '<wbr/>' é
+para quebrar a linha sem hífen, para o mesmo caso.
+
+<header></header> define uma área do código como compoente do cabeçalho da página
+
+Simbolos especiais você procura na internet e encontra coisas como:  &lt; &gt; &le &pound; &yen &euro;
