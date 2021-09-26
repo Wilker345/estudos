@@ -18,9 +18,22 @@ Títulos são representados por <h1><\h1>, <h2><\h2>, etc, de forma hierárquica
 Eles podem ser agrupados com <hgroup><\hgroup>
 
 Parágrafos podem ser separados por <p><\p> e  quebras de linhas podem usar o '&shy;' para dividir a palavra por
-hífens caso seja necessário na visualização do site, enquanto o '<wbr/>' é
+hífens caso seja necessário na visualização do site em monitores menores, enquanto o '<wbr/>' é
 para quebrar a linha sem hífen, para o mesmo caso.
+<br> quebra a linha de forma definitiva independente do monitor
 
 <header></header> define uma área do código como compoente do cabeçalho da página
 
 Simbolos especiais você procura na internet e encontra coisas como:  &lt; &gt; &le &pound; &yen &euro;
+
+tags como <b> "bold" ou <i> "italic" fazem a paradinha do word de deixar a letra em negrito ou italico, mas no geral
+é melhor usar coisa de css para isso.
+<em> tem um resultado similar a <i>, mas não é mera diferença visual e sim um indicativo pro site que determinado termo
+frase deve ter ênfase
+
+<pre></pre> deixa a aparencia do texto como antes da formatação, assim enters, espaços antes da formataçao ficam
+<code></code> exibe como um código
+
+<figure></figure> delimita uma região semântica para a imagem, isso contribui para mecanismos de busca e outras
+coisas como dispositivos de acessbilidade
+<figcaption> legenda </figcaption> : coloca uma legenda na figure

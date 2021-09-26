@@ -1,0 +1,35 @@
+<span style="text-decoration: underline;">Google Glass</span>
+Torna "google glass" com uma linha embaixo
+<span style="font-weight": xxxx">  yyyy </span> xxxx determina o quão "negrito" yyyy ficará
+
+<h1> style="text-align: center">OOOO </h1> colocaria o titulo no centro da pagina
+<p style="text-align: justify;"> <\p> faria o parágrafo ficar justificado, com:
+<p style="text-align: justify; text-indent: 50px"> <\p> você identaria o parágrafo
+
+MAS!
+tudo de style (CSS no geral) pode e DEVE ser aplicado previamente de forma direta nas tags de <h1><\h2>, <p><\p> etc
+dentro de <head><\head> usando uma sessão de <style><\style>
+ou aplicado dentro de um arquivo, que pode ser conectado ao arquivo html usando a sessão linK:
+<link rel="stylesheet" type="text/css" href= path>
+Exemplo:
+    <style>
+         p{
+             text-align: justify;
+              text-indent: 50px;
+         }
+    </style>
+
+mudando a cor  do fundo e da letra:
+body{
+            background-color: bisque;
+            color: darkslategray;
+        }
+o fundo tbm pode ser uma imagem: "
+body{
+  background-imagem: url("path");
+}
+
+cada <figure><\figure> pode receber uma classe, assim poderão ser acessados pelo css para edição como em:
+figure.class{
+    border: 8px solid red;
+}
