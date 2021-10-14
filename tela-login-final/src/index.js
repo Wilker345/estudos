@@ -9,7 +9,10 @@ class telaAbsoluta extends React.Component{
   }
 }
 
-class receberEmail extends React.Component{
+function receberEmail(){
+  <button>
+    GMAIL
+  </button>
 }
 
 class receberSenha extends React.Component{
