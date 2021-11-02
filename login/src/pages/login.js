@@ -4,7 +4,7 @@ import { signInWithPopup, GoogleAuthProvider, getAuth, signInWithEmailAndPasswor
 import {Button, Container} from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
-
+import '../styles/global.scss'
 export function Login(){
   const history = useHistory();
 
@@ -33,7 +33,7 @@ export function Login(){
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-      history.push('/sucesso');
+
   }
 
   function createUser(){
@@ -71,9 +71,14 @@ export function Login(){
   return(
 
     <Container>
-    <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+    <form noValidate autoComplete="off" onSubmit={handleSubmit} className='telaLogin'>
 
       <TextField
+      sx={{
+        marginTop: 2,
+        marginBottom: 2,
+        display: 'block'
+        }}
       onChange={(e) => setEmail(e.target.value)}
       label="e-mail"
       variant="outlined"
@@ -83,6 +88,11 @@ export function Login(){
       />
 
       <TextField
+      sx={{
+        marginTop: 2,
+        marginBottom: 2,
+        display: 'block'
+        }}
       onChange={(e) => setPass(e.target.value)}
       label="Senha"
       variant="outlined"
@@ -92,6 +102,9 @@ export function Login(){
       />
 
       <Button
+        sx={{
+          marginBottom: 1,
+        }}
         onClick={signIn}
         type="submit"
         color="primary"
@@ -101,16 +114,9 @@ export function Login(){
       </Button>
 
       <Button
-        onClick={openPopUp}
-        type="button"
-        color="secondary"
-        variant="contained"
-
-        >
-        Conecte-se com seu g-mail
-      </Button>
-
-      <Button
+        sx={{
+          marginBottom: 1,
+        }}
         onClick={createUser}
         type="submit"
         color="primary"
@@ -120,6 +126,18 @@ export function Login(){
         Cadastre-se
       </Button>
 
+      <Button
+        onClick={openPopUp}
+        type="button"
+        color="inherit"
+        variant="contained"
+
+        >
+        Conecte-se com seu g-mail
+      </Button>
+
+
+
     </form>
     </Container>
   )
@@ -127,5 +145,7 @@ export function Login(){
 
 {/*
 Lista de dúvidas:
-
+TypeError: Cannot read properties of undefined (reading 'push')
+quando usa o hook useHistory pra ir para outra página
+Por esse motivo, não pude demonstrar context
 */}
