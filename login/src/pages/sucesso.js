@@ -1,6 +1,6 @@
 export function sucesso()
 {
   return(
-    <p>Olá</p>
+    <h1>Olá</h1>
   )
 }
