@@ -6,10 +6,7 @@ import { sucesso } from "./pages/sucesso";
 function App() {
 
   return (
-    <BrowserRouter>
-        <Route path="/" exact={true} component={Login}/>
-        <Route path="/sucesso" component={sucesso} />
-    </BrowserRouter>
+  <Login></Login>
   );
 }
 

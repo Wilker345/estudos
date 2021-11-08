@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import {firebase} from '../data/firebase'
 import { signInWithPopup, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import {Button, Container} from '@material-ui/core'
-import { useHistory } from 'react-router-dom'
+
 import TextField from '@mui/material/TextField'
 import '../styles/global.scss'
 export function Login(){
-  const history = useHistory();
+  
 
   const[email, setEmail] = useState('')
   const[pass, setPass] = useState('')
