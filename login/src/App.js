@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Login } from "./pages/login";
 import { Sucesso } from "./pages/sucesso";
 import { Cadastro } from "./pages/cadastro";
+import { LoginProvider } from './contexts/loginContext';
 
 function App() {
 

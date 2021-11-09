@@ -6,6 +6,7 @@ import {Button, Container} from '@material-ui/core'
 import TextField from '@mui/material/TextField'
 import '../styles/global.scss'
 import { useHistory } from 'react-router';
+import LoginProvider from '../contexts/loginContext';
 
 export function Login(){
   const history = useHistory();
@@ -36,7 +37,7 @@ export function Login(){
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-      });
+      })
 
   }
 
@@ -73,7 +74,7 @@ export function Login(){
 
 
   return(
-
+    <LoginProvider>
     <Container>
     <form noValidate autoComplete="off" onSubmit={handleSubmit} className='telaLogin'>
 
@@ -144,6 +145,7 @@ export function Login(){
 
     </form>
     </Container>
+    </LoginProvider>
   )
 }
 
