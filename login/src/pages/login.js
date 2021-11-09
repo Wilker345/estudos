@@ -9,10 +9,12 @@ import { useHistory } from 'react-router';
 import LoginProvider from '../contexts/loginContext';
 
 export function Login(){
+
   const history = useHistory();
   function aoCadastro() {
     history.push('/cadastro');
   };
+
   const[email, setEmail] = useState('')
   const[pass, setPass] = useState('')
 
@@ -24,6 +26,10 @@ export function Login(){
     firebase.auth().signInWithPopup(provider).then(result => {
       const token = result.credential.accessToken;
       const user = result.user;
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
   })
   }
 
@@ -74,7 +80,7 @@ export function Login(){
 
 
   return(
-    <LoginProvider>
+
     <Container>
     <form noValidate autoComplete="off" onSubmit={handleSubmit} className='telaLogin'>
 
@@ -145,7 +151,7 @@ export function Login(){
 
     </form>
     </Container>
-    </LoginProvider>
+
   )
 }
 
