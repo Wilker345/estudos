@@ -30,6 +30,7 @@ export function Login(){
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
+    console.log('Error code: '+errorCode+'\n Error Message: '+error.message)
   })
   }
 
