@@ -1,44 +1,17 @@
 import React, {useState} from 'react'
-import {firebase} from '../data/firebase'
-import { signInWithPopup, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {Button, Container} from '@material-ui/core'
 
 import TextField from '@mui/material/TextField'
 import '../styles/global.scss'
-import { useHistory } from 'react-router';
+export function Cadastro(){
 
-export function Login(){
-  const history = useHistory();
-  function aoCadastro() {
-    history.push('/cadastro');
-  };
+
   const[email, setEmail] = useState('')
   const[pass, setPass] = useState('')
 
   const[emailError, setEmailError] = useState(false)
   const[passError, setPassError] = useState(false)
-
-  function openPopUp() {
-    const provider = new GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(result => {
-      const token = result.credential.accessToken;
-      const user = result.user;
-  })
-  }
-
-
-  function signIn(){
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, pass)
-      .then((userCredential) => {
-        const user = userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-
-  }
 
   function createUser(){
     const auth = getAuth();
@@ -49,7 +22,6 @@ export function Login(){
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // ..
     });
   }
 
@@ -109,48 +81,16 @@ export function Login(){
         sx={{
           marginBottom: 1,
         }}
-        onClick={signIn}
-        type="submit"
-        color="primary"
-        variant="contained"
-        >
-        Login
-      </Button>
-
-      <Button
-        sx={{
-          marginBottom: 1,
-        }}
-        onClick={aoCadastro}
+        onClick={createUser}
         type="submit"
         color="primary"
         variant="contained"
 
         >
-        Criar Usuário
+        Cadastre-se
       </Button>
-
-      <Button
-        onClick={openPopUp}
-        type="button"
-        color="inherit"
-        variant="contained"
-
-        >
-        Conecte-se com seu g-mail
-      </Button>
-
-
 
     </form>
     </Container>
   )
 }
-
-
-{/*
-Lista de dúvidas:
-TypeError: Cannot read properties of undefined (reading 'push')
-quando usa o hook useHistory pra ir para outra página
-Por esse motivo, não pude demonstrar context
-*/}
