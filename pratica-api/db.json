@@ -1,7 +1,32 @@
 {
   "list": [
-    { "id": 1, "item": "bread" },
-    { "id": 2, "item": "grapes" },
-    { "id": 3, "item": "rice" }
+    {
+      "id": 1,
+      "item": "bread"
+    },
+    {
+      "id": 2,
+      "item": "grapes"
+    },
+    {
+      "id": 3,
+      "item": "rice"
+    },
+    {
+      "id": 4,
+      "item": "beans"
+    },
+    {
+      "id": 5,
+      "item": "potatos"
+    },
+    {
+      "item": "bird seed",
+      "id": 6
+    },
+    {
+      "item": "apples",
+      "id": 7
+    }
   ]
 }
