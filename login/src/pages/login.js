@@ -1,14 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {firebase} from '../data/firebase'
 import { signInWithPopup, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import {Button, Container} from '@material-ui/core'
-
+import { LoginContext } from '../contexts/loginContext'
 import TextField from '@mui/material/TextField'
 import '../styles/global.scss'
 import { useHistory } from 'react-router';
-import LoginProvider from '../contexts/loginContext';
+
+
 
 export function Login(){
+  const { user } = useContext(LoginContext);
 
   const history = useHistory();
   function aoCadastro() {
@@ -30,7 +32,7 @@ export function Login(){
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log('Error code: '+errorCode+'\n Error Message: '+error.message)
+    console.log('Error code: '+errorCode+'\n Error Message: '+errorMessage)
   })
   }
 
@@ -48,19 +50,6 @@ export function Login(){
 
   }
 
-  function createUser(){
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, pass)
-    .then((userCredential) => {
-      const user = userCredential.user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-  }
-
   const handleSubmit = (e) =>{
     e.preventDefault()
     setEmailError(false)
@@ -75,6 +64,7 @@ export function Login(){
 
     if (email && pass) {
       console.log(email, pass)
+
     }
   }
 
@@ -83,8 +73,10 @@ export function Login(){
   return(
 
     <Container>
+    {!!user ? (
+      history.push("/sucesso")
+    ) : (
     <form noValidate autoComplete="off" onSubmit={handleSubmit} className='telaLogin'>
-
       <TextField
       sx={{
         marginTop: 2,
@@ -151,6 +143,7 @@ export function Login(){
 
 
     </form>
+    )}
     </Container>
 
   )
@@ -159,7 +152,5 @@ export function Login(){
 
 {/*
 Lista de dúvidas:
-TypeError: Cannot read properties of undefined (reading 'push')
-quando usa o hook useHistory pra ir para outra página
-Por esse motivo, não pude demonstrar context
+Utilização do Context pro State
 */}

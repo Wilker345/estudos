@@ -1,11 +1,17 @@
-import React, {useState, createContext} from 'react'
-
+import React, {useState, createContext, useEffect} from 'react'
+import {firebase} from "../data/firebase";
 export const LoginContext = createContext();
 
 function LoginProvider (props){
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(null);
+
+  useEffect( () => { firebase
+    .auth()
+    .onAuthStateChanged(setUser)
+  })
+
   return(
-    <LoginContext.Provider value={loggedIn}>
+    <LoginContext.Provider value={user}>
       {props.children}
     </LoginContext.Provider>
   )
