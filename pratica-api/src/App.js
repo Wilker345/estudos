@@ -1,11 +1,12 @@
 import './App.css';
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef } from 'react'
 import { getList, setItem } from './services/list';
 
 function App() {
   const [list, setList] = useState([])
   const [itemInput, setItemInput] = useState('');
   const [alert, setAlert] = useState(false);
+  let mounted = useRef(true);
 
   useEffect(() => {
     if(alert) {
@@ -14,24 +15,30 @@ function App() {
       }, 1000)
     }
   }, [alert])
-  
+
   useEffect(() => {
-    let mounted = true;
+    mounted.current = true;
+    if(list.length && !alert) {
+      return;
+    }
     getList()
       .then(items => {
-        if(mounted) {
+        if(mounted.current) {
           setList(items)
         }
       })
-    return () => mounted = false;
-  }, [])
+    return () => mounted.current = false;
+
+  }, [alert, list])
 
   const handleSubmit =(e) =>{
     e.preventDefault();
     setItem(itemInput)
     .then(() => {
+      if(mounted.current){
       setItemInput('');
       setAlert(true);
+      }
     })
   };
 

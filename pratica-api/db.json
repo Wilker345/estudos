@@ -27,6 +27,10 @@
     {
       "item": "apples",
       "id": 7
+    },
+    {
+      "item": "pineapples",
+      "id": 8
     }
   ]
 }
