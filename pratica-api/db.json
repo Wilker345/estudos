@@ -31,6 +31,14 @@
     {
       "item": "pineapples",
       "id": 8
+    },
+    {
+      "item": "teste loja",
+      "id": 9
+    },
+    {
+      "item": "teste 2",
+      "id": 10
     }
   ]
 }
