@@ -14,3 +14,10 @@
   margin:10px;
   font-size: 25px;
 }
+.card{
+  margin: 5px;
+  border: 2px solid black
+}
+.botao{
+  margin: 5px;
+}
