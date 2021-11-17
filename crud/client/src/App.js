@@ -30,8 +30,12 @@ function App() {
     Axios.delete(`http://localhost:3001/api/delete/${delEmpresa}`)
   }
 
-  const mudarNomeEmpresa = (nomeNovoEmpresa) => {
-    Axios.put("http://localhost:3001/api/update", {})
+  const mudarNomeEmpresa = (empresa) => {
+    Axios.put("http://localhost:3001/api/update", {
+      cnpj: empresa,
+      nome: nomeNovo,
+    });
+    setNomeNovo('');
   }
 
   return (
@@ -56,8 +60,14 @@ function App() {
           return(
           <div className="card">
           nome: {val.nome} | CNPJ: {val.cnpj}
+          <br/>
           <button className="botao" onClick={() => {deleteEmpresa(val.cnpj)}}>Delete</button>
-          <button className="botao" onClick={() => {mudarNomeEmpresa(val.cnpj)}}>Update</button>
+          <br/>
+          <input type="text" id="updateInput" onChange={ (e) => {
+            setNomeNovo(e.target.value)
+          }} />
+          <br/>
+          <button className="botao" onClick={() => {mudarNomeEmpresa(val.nome)}}>Update</button>
           </div>
           )
         })}

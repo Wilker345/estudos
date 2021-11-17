@@ -55,7 +55,7 @@ app.delete("/api/delete/:cnpj", (req, res) => {
 app.put("/api/update", (req, res) => {
   const empresa = req.body.cnpj;
   const novoNome = req.body.nome;
-  const sqlUpdate = "UPDATE SET dados_empresa nome = ? WHERE cnpj = ?";
+  const sqlUpdate = "UPDATE dados_empresa SET nome = ? WHERE nome = ?";
 
    db.query(sqlUpdate, [novoNome, empresa], (err, result) =>{
     if (err) console.log(err);
