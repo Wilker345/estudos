@@ -4,4 +4,4 @@ module.exports({
   password: "password",
   database: "cruddatabase",
   dialect: 'mysql',
-});
+});+++++
