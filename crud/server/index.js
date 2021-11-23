@@ -63,8 +63,16 @@ app.put("/api/update", (req, res) => {
 });
 
 
+//Sessão de login
+app.get('/login', (req, res) =>{
+  res.send('<a href="/auth/google">Autenticação com Google</a>')
+});
 
+app.get('/protected', (req, res) =>{
+  res.send('Area do crud');
+})
 
+///Sessão de inicialização
 app.listen(3001, ()=>{
   console.log("running on port 3001");
 })
