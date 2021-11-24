@@ -72,7 +72,11 @@ app.put("/api/update", (req, res) => {
 
 
 //Sessão de login
-app.use(session( { secret: process.env.SECRET} ));
+app.use(session( {
+  secret: process.env.SECRET,
+  saveUninitialized: false,
+  resave: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
