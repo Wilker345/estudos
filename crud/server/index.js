@@ -1,13 +1,21 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const mysql = require('mysql')
-const cors = require('cors')
+const cors = require('cors');
+const passport = require('passport');
+require('dotenv').config()
+require('./auth')
+
+function isLoggedIn(req, res, next) {
+  req.user ? next(): res.sendStatus(401);
+}
 
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "cruddatabase",
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
 });
 
 app.use(cors())
@@ -64,13 +72,38 @@ app.put("/api/update", (req, res) => {
 
 
 //Sessão de login
+app.use(session( { secret: process.env.SECRET} ));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get('/login', (req, res) =>{
   res.send('<a href="/auth/google">Autenticação com Google</a>')
 });
 
-app.get('/protected', (req, res) =>{
-  res.send('Area do crud');
+app.get('/protected', isLoggedIn, (req, res) => {
+  res.send(`Olá, ${req.user.displayName}`);
+});
+
+app.get('/logout', (req, res) => {
+  req.logOut();
+  req.session.destroy();
+  res.send('Logout efetuado com sucesso.');
 })
+
+app.get('/auth/google',
+passport.authenticate('google', { scope: ['email', 'profile'] })
+)
+
+app.get('/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/protected',
+    failureRedirect: '/auth/failure',
+  })
+);
+
+app.get('/auth/failure', (req, res) => {
+  res.send('erro com o login');
+});
 
 ///Sessão de inicialização
 app.listen(3001, ()=>{

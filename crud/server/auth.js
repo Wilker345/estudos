@@ -9,9 +9,22 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3001/google/callback",
     passReqToCallback   : true
   },
+  /*
   function(request, accessToken, refreshToken, profile, done) {
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return done(err, user);
     });
   }
+  */
+  function(request, accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+  }
 ));
+
+passport.serializeUser(function(user, done){
+  done(null, user);
+})
+
+passport.deserializeUser(function(user, done){
+  done(null, user);
+})
