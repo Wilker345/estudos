@@ -1,15 +1,71 @@
-const express = require('express');
-const session = require('express-session');
+import express from 'express';
+import session from 'express-session';
+import cors from 'cors';
+import { companyRoutes } from "./routes/company.mjs";
+import dotenv from 'dotenv';
+import './auth.mjs';
+import passport from 'passport';
+
 const app = express();
-const mysql = require('mysql')
-const cors = require('cors');
-const passport = require('passport');
-require('dotenv').config()
-require('./auth')
+dotenv.config();
+
 
 function isLoggedIn(req, res, next) {
   req.user ? next(): res.sendStatus(401);
 }
+
+app.use(cors())
+app.use(express.json())
+app.use("/companies", companyRoutes);
+app.use(express.urlencoded({
+  extended: true
+}));
+
+//Sessão de login
+app.use(session( {
+  secret: process.env.SECRET,
+  saveUninitialized: false,
+  resave: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/login', (req, res) =>{
+  res.send('<a href="/auth/google">Autenticação com Google</a>')
+});
+
+app.get('/crud', isLoggedIn, (req, res) => {
+  res.send(`Olá, ${req.user.displayName}`);
+});
+
+app.get('/logout', (req, res) => {
+  req.logOut();
+  req.session.destroy();
+  res.send('Logout efetuado com sucesso.');
+})
+
+app.get('/auth/google',
+passport.authenticate('google', { scope: ['email', 'profile'] })
+)
+
+app.get('/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/crud',
+    failureRedirect: '/auth/failure',
+  })
+);
+
+app.get('/auth/failure', (req, res) => {
+  res.send('erro com o login');
+});
+
+app.listen(3001, ()=>{
+  console.log("running on port 3001");
+})
+
+/* querys anteriores
+
+const mysql = require('mysql')
 
 const db = mysql.createPool({
   host: process.env.HOST,
@@ -18,11 +74,6 @@ const db = mysql.createPool({
   database: process.env.DATABASE
 });
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({
-  extended: true
-}));
 
 app.get("/", (req, res)=>{
   res.send("tela inicial alcançada com sucesso");
@@ -69,47 +120,4 @@ app.put("/api/update", (req, res) => {
     if (err) console.log(err);
    });
 });
-
-
-//Sessão de login
-app.use(session( {
-  secret: process.env.SECRET,
-  saveUninitialized: false,
-  resave: true
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get('/login', (req, res) =>{
-  res.send('<a href="/auth/google">Autenticação com Google</a>')
-});
-
-app.get('/protected', isLoggedIn, (req, res) => {
-  res.send(`Olá, ${req.user.displayName}`);
-});
-
-app.get('/logout', (req, res) => {
-  req.logOut();
-  req.session.destroy();
-  res.send('Logout efetuado com sucesso.');
-})
-
-app.get('/auth/google',
-passport.authenticate('google', { scope: ['email', 'profile'] })
-)
-
-app.get('/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/protected',
-    failureRedirect: '/auth/failure',
-  })
-);
-
-app.get('/auth/failure', (req, res) => {
-  res.send('erro com o login');
-});
-
-///Sessão de inicialização
-app.listen(3001, ()=>{
-  console.log("running on port 3001");
-})
+*/

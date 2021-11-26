@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Axios from 'axios'
+import { companyRoutes } from '../../server/routes/company.mjs';
 
 function App() {
   const[cnpj, setCnpj] = useState('')
@@ -10,7 +11,7 @@ function App() {
   const[nomeNovo, setNomeNovo] = useState('')
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/api/get").then((response)=>{
+    Axios.get(companyRoutes).then((response)=>{
       setListaEmpresas(response.data)
     })
   }, [])
