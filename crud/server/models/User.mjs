@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 const { DataTypes } = Sequelize;
-import { sequelize } from "../database.js";
+import { sequelize } from "../database.mjs";
 
 export const User = sequelize.define("user", {
   email: {
