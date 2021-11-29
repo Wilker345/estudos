@@ -1,7 +1,11 @@
+
+dotenv.config();
+
 app.use(session( {
   secret: process.env.SECRET,
   saveUninitialized: false,
-  resave: true
+  resave: true,
+  cookie: { secure: 'auto'}
 }));
 app.use(passport.initialize());
 app.use(passport.session());

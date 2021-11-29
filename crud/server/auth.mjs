@@ -11,19 +11,19 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3001/google/callback",
     passReqToCallback   : true
   },
-
+/*
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   },
+*/
 
-  /*
   function(request, accessToken, refreshToken, profile, done) {
     return done(null, profile);
   }
 ));
-*/
+
 
 passport.serializeUser(function(user, done){
   done(null, user);
@@ -32,4 +32,11 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(user, done){
   done(null, user);
 })
-))
+
+
+/* async (accessToken, refreshToken, profile, done) => {
+  try { const user = await User.findOrCreate({ googleId: profile.id, });
+   done(null, user.toJSON());
+   } catch (error) {
+      done(error, null); } } ) ); */
+
