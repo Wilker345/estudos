@@ -8,3 +8,9 @@ export const sequelize = new Sequelize(process.env.database, process.env.user, p
   host: process.env.host,
   dialect: 'mysql'
 });
+async function csequelize(){
+  await sequelize.sync({
+    force: false
+  });
+}
+csequelize();

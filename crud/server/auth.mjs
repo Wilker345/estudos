@@ -10,14 +10,29 @@ passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3001/google/callback",
-    passReqToCallback   : true
   },
 
-  function(accessToken, refreshToken, profile, cb) {
+  async function(accessToken, refreshToken, profile, cb) {
     console.log(profile)
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
+    try{
+      const user = await User.findOne({
+      where: {
+        email: profile._json.email
+      }
+    })
+    console.log('Usuário encontrado: ', user)
+    if (!user){
+      await User.Create({
+        where: {
+        token: accessToken,
+        email: profile._json.email }
+      });
+    }
+
+    }catch(e){
+      console.log(e)
+    }
+    cb(null, profile)
   },
 
 /*
@@ -27,7 +42,7 @@ passport.use(new GoogleStrategy({
 ));
 */
 passport.serializeUser(function(user, cb){
-  cb(null, user.googleId);
+  cb(null, user);
 }),
 
 passport.deserializeUser(function(user, cb){

@@ -17,9 +17,9 @@ function isLoggedIn(req, res, next) {
 app.use(cors())
 app.use(express.json())
 app.use("/companies", companyRoutes);
-app.use(express.urlencoded({
+/* app.use(express.urlencoded({
   extended: true
-}));
+})); */
 
 //Sessão de login
 app.use(session( {

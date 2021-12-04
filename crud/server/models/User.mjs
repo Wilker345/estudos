@@ -14,7 +14,7 @@ export const User = sequelize.define("user", {
     allowNull: true,
   },
   token: {
-    type: DataTypes.STRING(20),
+    type: DataTypes.STRING(),
     allowNull: true,
     unique: true,
   }
