@@ -1,9 +1,10 @@
 import passport from 'passport';
 import dotenv from 'dotenv';
 import { User } from './models/User.mjs'
+
 dotenv.config();
 
-import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
+import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -11,29 +12,29 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3001/google/callback",
     passReqToCallback   : true
   },
-/*
+
   function(accessToken, refreshToken, profile, cb) {
+    console.log(profile)
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   },
-*/
 
+/*
   function(request, accessToken, refreshToken, profile, done) {
     return done(null, profile);
   }
 ));
-
-
-passport.serializeUser(function(user, done){
-  done(null, user);
+*/
+passport.serializeUser(function(user, cb){
+  cb(null, user.googleId);
 }),
 
-passport.deserializeUser(function(user, done){
-  done(null, user);
+passport.deserializeUser(function(user, cb){
+  cb(null, user);
 })
 
-
+))
 /* async (accessToken, refreshToken, profile, done) => {
   try { const user = await User.findOrCreate({ googleId: profile.id, });
    done(null, user.toJSON());
