@@ -22,12 +22,10 @@ passport.use(new GoogleStrategy({
     })
     console.log('Usuário encontrado: ', user)
     if (!user){
-      await User.Create({
-        where: {
+      await User.create({
         token: accessToken,
         email: profile._json.email,
         name: profile._json.name
-        }
       });
     }
 
