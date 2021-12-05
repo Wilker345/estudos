@@ -4,13 +4,13 @@ import { sequelize } from "../database.mjs";
 
 export const User = sequelize.define("user", {
   email: {
-    type: DataTypes.STRING(45),
+    type: DataTypes.STRING(),
     primaryKey: true,
     allowNull: false,
     unique: true,
   },
   name: {
-    type: DataTypes.STRING(45),
+    type: DataTypes.STRING(),
     allowNull: true,
   },
   token: {

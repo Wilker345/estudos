@@ -25,7 +25,9 @@ passport.use(new GoogleStrategy({
       await User.Create({
         where: {
         token: accessToken,
-        email: profile._json.email }
+        email: profile._json.email,
+        name: profile._json.name
+        }
       });
     }
 
@@ -35,12 +37,6 @@ passport.use(new GoogleStrategy({
     cb(null, profile)
   },
 
-/*
-  function(request, accessToken, refreshToken, profile, done) {
-    return done(null, profile);
-  }
-));
-*/
 passport.serializeUser(function(user, cb){
   cb(null, user);
 }),
@@ -50,9 +46,3 @@ passport.deserializeUser(function(user, cb){
 })
 
 ))
-/* async (accessToken, refreshToken, profile, done) => {
-  try { const user = await User.findOrCreate({ googleId: profile.id, });
-   done(null, user.toJSON());
-   } catch (error) {
-      done(error, null); } } ) ); */
-
