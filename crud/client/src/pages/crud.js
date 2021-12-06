@@ -10,12 +10,12 @@ export function Crud() {
   const[nomeNovo, setNomeNovo] = useState('')
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/api/get").then((response)=>{
+    Axios.get("http://localhost:3001/companies").then((response)=>{
       setListaEmpresas(response.data)
     })
   }, [])
   const submitEmpresa = () => {
-    Axios.post("http://localhost:3001/api/insert", {
+    Axios.post("http://localhost:3001/companies", {
       cnpj: cnpj,
       nome: nome,
     });
@@ -27,11 +27,11 @@ export function Crud() {
   };
 
   const deleteEmpresa = (delEmpresa) => {
-    Axios.delete(`http://localhost:3001/api/delete/${delEmpresa}`)
+    Axios.delete(`companies/:${delEmpresa}`)
   }
 
   const mudarNomeEmpresa = (empresa) => {
-    Axios.put("http://localhost:3001/api/update", {
+    Axios.put(`companies/:${empresa}`, {
       cnpj: empresa,
       nome: nomeNovo,
     });
