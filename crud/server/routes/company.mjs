@@ -32,8 +32,8 @@ companyRoutes.delete("/:cnpj", async (req, res) => {
 companyRoutes.patch("/:cnpj", async (req, res) => {
   try {
     const company = await Company.findByPk(req.params.cnpj);
-    await company.update(req.body);
-    res.json({ message: "Empresa atualizada com sucesso." });
+    await company.update(req.body.name);
+    res.json({ message: "Nome da empresa atualizado com sucesso." });
   } catch (e) {
     console.log(e);
     res.json({ error: e });
