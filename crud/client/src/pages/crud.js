@@ -11,7 +11,7 @@ export function Crud() {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/companies").then((response)=>{
-      setListaEmpresas(response.data)
+      setListaEmpresas(response.data.data)
     })
   }, [])
   const submitEmpresa = () => {
