@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import LoginProvider from './context/UserContext';
 
 
 ReactDOM.render(
-    <App />,
-  document.getElementById('root')
+  <LoginProvider>
+    <App />
+  </LoginProvider>
+  ,document.getElementById('root')
 );
 
 

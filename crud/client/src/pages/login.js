@@ -20,6 +20,9 @@ export function Login (){
   function aoCrud() {
     history.push('/crud');
   };
+  function googleLogin(){
+    history.push('/auth/google')
+  }
 
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -53,6 +56,7 @@ export function Login (){
         marginBottom: 2,
         display: 'block'
         }}
+      onChange={(e) => setEmail(e.target.value)}
       fullWidth
       label="Email"
       type='text'
@@ -65,6 +69,7 @@ export function Login (){
         marginBottom: 2,
         display: 'block'
         }}
+        onChange={(e) => setPass(e.target.value)}
       fullWidth
       label="Senha"
       type='text'
@@ -87,7 +92,7 @@ export function Login (){
       size='large'
       color='error'
       startIcon={<GoogleIcon/>}
-      onClick={aoCrud}
+      onClick={googleLogin}
       >Entrar com Google
       </Button>
       </form>
