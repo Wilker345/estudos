@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import {Typography, Container, Button, TextField} from '@mui/material';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
 import '../Styles.css';
 import Axios from 'axios'
 
@@ -8,6 +10,10 @@ export function Crud() {
   const[nome, setNome] = useState('')
   const[listaEmpresas, setListaEmpresas] = useState([])
   const[nomeNovo, setNomeNovo] = useState('')
+  const columns = [
+    { title: 'nome', field: 'Empresa',},
+    { title: 'cnpj', field: 'CNPJ',}
+  ]
 
   useEffect(() => {
     Axios.get("http://localhost:3001/companies").then((response)=>{
@@ -39,41 +45,92 @@ export function Crud() {
   }
 
   return (
+    <Container>
     <div className="Crud">
-      <h2>
-        CRUD APPLICATION
-      </h2>
+    <Typography
+    component="h1"
+    variant="h5"
+    >Crud para Empresas
+    </Typography>
 
       <div className="form">
-        <label>CNPJ:</label>
-        <input type="text" name="cnpj"
-        onChange={(e) => {setCnpj(e.target.value)}} />
-
-        <label>Nome da Empresa:</label>
-        <input type="text" name="nomeEmpresa"
-         onChange={(e) => {setNome(e.target.value)}} />
-
-
-        <button onClick={submitEmpresa} > Enviar </button>
+      <TextField
+      sx={{
+        marginTop: 2,
+        marginBottom: 2,
+        display: 'block'
+        }}
+      onChange={(e) => setCnpj(e.target.value)}
+      label="CNPJ"
+      type='text'
+      variant="outlined"
+      required
+      />
+      <TextField
+      sx={{
+        marginTop: 2,
+        marginBottom: 2,
+        display: 'block'
+        }}
+      onChange={(e) => setNome(e.target.value)}
+      label="Nome da Empresa"
+      type='text'
+      variant="outlined"
+      required
+      />
+      <Button
+      sx={{
+        marginBottom: 1,
+        }}
+      variant='contained'
+      className='botaoEnviarEmpresa'
+      onClick={submitEmpresa}
+      >Criar
+      </Button>
 
         {listaEmpresas.map((val)=> {
           return(
-          <div className="card">
-          nome: {val.nome} | CNPJ: {val.cnpj}
-          <br/>
-          <button className="botao" onClick={() => {deleteEmpresa(val.cnpj)}}>Delete</button>
-          <br/>
-          <input type="text" id="updateInput" onChange={ (e) => {
-            setNomeNovo(e.target.value)
-          }} />
-          <br/>
-          <button className="botao" onClick={() => {mudarNomeEmpresa(val.nome)}}>Update</button>
-          </div>
+            <div className="card">
+            <Typography
+            variant="h6"
+            >
+            Nome: {val.nome} | CNPJ: {val.cnpj}
+            </Typography>
+            <Button
+            variant='contained'
+            size='small'
+            color='error'
+            onClick={deleteEmpresa(val.cnpj)}
+            >Deletar
+            </Button>
+            <TextField
+            sx={{
+            marginTop: 2,
+            marginBottom: 2,
+            display: 'block'
+            }}
+            onChange={(e) => setNomeNovo(e.target.value)}
+            label="Novo nome"
+            type='text'
+            variant="outlined"
+            />
+            <Button
+            sx={{
+            marginBottom: 1,
+            }}
+            variant='contained'
+            className='botao'
+            onClick={() => {mudarNomeEmpresa(val.nome)}}
+            >Atualizar
+            </Button>
+            <br/>
+            </div>
           )
         })}
       </div>
 
     </div>
+    </Container>
   );
 }
 
