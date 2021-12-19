@@ -21,7 +21,11 @@ companyRoutes.post("/", async (req, res) => {
 
 companyRoutes.delete("/:cnpj", async (req, res) => {
   try {
-    await Company.destroy({ where: { cnpj: req.params.cnpj } });
+    await Company.destroy({
+      where: {
+        cnpj: req.params.cnpj
+      }
+     });
     res.json({ message: "Empresa excluída com sucesso." });
   } catch (e) {
     console.log(e);
@@ -32,7 +36,7 @@ companyRoutes.delete("/:cnpj", async (req, res) => {
 companyRoutes.patch("/:cnpj", async (req, res) => {
   try {
     const company = await Company.findByPk(req.params.cnpj);
-    await company.update(req.body.name);
+    await company.update(req.body);
     res.json({ message: "Nome da empresa atualizado com sucesso." });
   } catch (e) {
     console.log(e);

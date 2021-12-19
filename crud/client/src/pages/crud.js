@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {Typography, Container, Button, TextField} from '@mui/material';
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
+import {List, ListItem, ListItemIcon, ListItemText} from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import '../Styles.css';
 import Axios from 'axios'
 
@@ -10,10 +12,7 @@ export function Crud() {
   const[nome, setNome] = useState('')
   const[listaEmpresas, setListaEmpresas] = useState([])
   const[nomeNovo, setNomeNovo] = useState('')
-  const columns = [
-    { title: 'nome', field: 'Empresa',},
-    { title: 'cnpj', field: 'CNPJ',}
-  ]
+
 
   useEffect(() => {
     Axios.get("http://localhost:3001/companies").then((response)=>{
@@ -23,23 +22,23 @@ export function Crud() {
   const submitEmpresa = () => {
     Axios.post("http://localhost:3001/companies", {
       cnpj: cnpj,
-      nome: nome,
+      name: nome,
     });
 
   setListaEmpresas([
     ...listaEmpresas,
-    {nome: nome, cnpj: cnpj}
+    {name: nome, cnpj: cnpj}
     ]);
   };
 
   const deleteEmpresa = (delEmpresa) => {
-    Axios.delete(`companies/:${delEmpresa}`)
+    Axios.delete(`http://localhost:3001/companies/:${delEmpresa}`)
   }
 
   const mudarNomeEmpresa = (empresa) => {
-    Axios.put(`companies/:${empresa}`, {
+    Axios.put(`http://localhost:3001/companies/:${empresa}`, {
       cnpj: empresa,
-      nome: nomeNovo,
+      name: nomeNovo,
     });
     setNomeNovo('');
   }
@@ -87,46 +86,22 @@ export function Crud() {
       onClick={submitEmpresa}
       >Criar
       </Button>
-
-        {listaEmpresas.map((val)=> {
-          return(
-            <div className="card">
-            <Typography
-            variant="h6"
-            >
-            Nome: {val.nome} | CNPJ: {val.cnpj}
-            </Typography>
-            <Button
-            variant='contained'
-            size='small'
-            color='error'
-            onClick={deleteEmpresa(val.cnpj)}
-            >Deletar
-            </Button>
-            <TextField
-            sx={{
-            marginTop: 2,
-            marginBottom: 2,
-            display: 'block'
-            }}
+      <List>
+        {listaEmpresas.map(val => (
+          <ListItem
+          key={val.cnpj}
+          button
+          >
+          <TextField label={val.name} size='small' variant='standard'
             onChange={(e) => setNomeNovo(e.target.value)}
-            label="Novo nome"
-            type='text'
-            variant="outlined"
-            />
-            <Button
-            sx={{
-            marginBottom: 1,
-            }}
-            variant='contained'
-            className='botao'
-            onClick={() => {mudarNomeEmpresa(val.nome)}}
-            >Atualizar
-            </Button>
-            <br/>
-            </div>
-          )
-        })}
+          />
+          <ListItemIcon>
+          <DeleteIcon button onClick={() => {deleteEmpresa(val.cnpj)}}/>
+          <EditIcon button onClick={() => {mudarNomeEmpresa(val.cnpj)}}/>
+          </ListItemIcon>
+          </ListItem>
+        ))}
+      </List>
       </div>
 
     </div>
