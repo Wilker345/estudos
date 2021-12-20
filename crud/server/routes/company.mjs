@@ -19,7 +19,7 @@ companyRoutes.post("/", async (req, res) => {
   }
 });
 
-companyRoutes.delete("/:cnpj", async (req, res) => {
+companyRoutes.delete("/delete/:cnpj", async (req, res) => {
   try {
     await Company.destroy({
       where: {
@@ -33,7 +33,7 @@ companyRoutes.delete("/:cnpj", async (req, res) => {
   }
 });
 
-companyRoutes.patch("/:cnpj", async (req, res) => {
+companyRoutes.patch("/patch/:cnpj", async (req, res) => {
   try {
     const company = await Company.findByPk(req.params.cnpj);
     await company.update(req.body);

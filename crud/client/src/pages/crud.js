@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Typography, Container, Button, TextField} from '@mui/material';
-import {List, ListItem, ListItemIcon, ListItemText} from '@mui/material'
+import {List, ListItem, ListItemIcon, IconButton} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import '../Styles.css';
@@ -32,11 +32,11 @@ export function Crud() {
   };
 
   const deleteEmpresa = (delEmpresa) => {
-    Axios.delete(`http://localhost:3001/companies/:${delEmpresa}`)
+    Axios.delete(`http://localhost:3001/companies/delete/:${delEmpresa}`)
   }
 
   const mudarNomeEmpresa = (empresa) => {
-    Axios.put(`http://localhost:3001/companies/:${empresa}`, {
+    Axios.patch(`http://localhost:3001/companies/patch/:${empresa}`, {
       cnpj: empresa,
       name: nomeNovo,
     });
@@ -90,14 +90,23 @@ export function Crud() {
         {listaEmpresas.map(val => (
           <ListItem
           key={val.cnpj}
-          button
+
           >
           <TextField label={val.name} size='small' variant='standard'
             onChange={(e) => setNomeNovo(e.target.value)}
           />
           <ListItemIcon>
-          <DeleteIcon button onClick={() => {deleteEmpresa(val.cnpj)}}/>
-          <EditIcon button onClick={() => {mudarNomeEmpresa(val.cnpj)}}/>
+          <IconButton>
+          <DeleteIcon
+            onClick={() => {deleteEmpresa(val.cnpj)}}
+            />
+          </IconButton>
+
+          <IconButton>
+          <EditIcon
+            onClick={() => {mudarNomeEmpresa(val.cnpj)}}
+            />
+          </IconButton>
           </ListItemIcon>
           </ListItem>
         ))}
