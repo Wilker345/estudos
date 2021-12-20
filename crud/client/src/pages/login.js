@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router';
 import React from "react";
 import { useState } from 'react';
+import Axios from 'axios';
 import {Typography, Container, Button, TextField} from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import '@fontsource/roboto/300.css';
@@ -21,7 +22,7 @@ export function Login (){
     history.push('/crud');
   };
   function googleLogin(){
-    history.push('/auth/google')
+    Axios.get('http://localhost:3001/auth/google')
   }
 
   const handleSubmit = (e) =>{
@@ -92,7 +93,7 @@ export function Login (){
       size='large'
       color='error'
       startIcon={<GoogleIcon/>}
-      onClick={googleLogin}
+      onClick={() => {googleLogin()}}
       >Entrar com Google
       </Button>
       </form>

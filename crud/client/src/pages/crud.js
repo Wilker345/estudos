@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Typography, Container, Button, TextField} from '@mui/material';
-import {List, ListItem, ListItemIcon, IconButton} from '@mui/material'
+import {List, ListItem, ListItemIcon, IconButton, Box} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import '../Styles.css';
@@ -86,6 +86,7 @@ export function Crud() {
       onClick={submitEmpresa}
       >Criar
       </Button>
+      <Box sx={{ bgcolor: 'text.main' }}>
       <List>
         {listaEmpresas.map(val => (
           <ListItem
@@ -96,21 +97,19 @@ export function Crud() {
             onChange={(e) => setNomeNovo(e.target.value)}
           />
           <ListItemIcon>
-          <IconButton>
-          <DeleteIcon
-            onClick={() => {deleteEmpresa(val.cnpj)}}
-            />
+          <IconButton
+          onClick={() => {deleteEmpresa(val.cnpj)}}>
+          <DeleteIcon/>
           </IconButton>
-
-          <IconButton>
-          <EditIcon
-            onClick={() => {mudarNomeEmpresa(val.cnpj)}}
-            />
+          <IconButton
+          onClick={() => {mudarNomeEmpresa(val.cnpj)}}>
+          <EditIcon/>
           </IconButton>
           </ListItemIcon>
           </ListItem>
         ))}
       </List>
+      </Box>
       </div>
 
     </div>
