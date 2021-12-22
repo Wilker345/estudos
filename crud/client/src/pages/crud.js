@@ -31,14 +31,14 @@ export function Crud() {
     ]);
   };
 
-  const deleteEmpresa = (delEmpresa) => {
-    Axios.delete(`http://localhost:3001/companies/delete/:${delEmpresa}`)
+  const deleteEmpresa = (empresa) => {
+    Axios.delete(`http://localhost:3001/companies/delete/:${empresa}`);
   }
 
   const mudarNomeEmpresa = (empresa) => {
     Axios.patch(`http://localhost:3001/companies/patch/:${empresa}`, {
       cnpj: empresa,
-      name: nomeNovo,
+      name: nomeNovo
     });
     setNomeNovo('');
   }

@@ -21,8 +21,9 @@ export function Login (){
   function aoCrud() {
     history.push('/crud');
   };
-  function googleLogin(){
-    Axios.get('http://localhost:3001/auth/google')
+  const googleLogin = async () => {
+    const googleLoginURL = 'http://localhost:3001/auth/google'
+    const popUp = window.open(googleLoginURL, 'blank', 'width=500,height=600')
   }
 
   const handleSubmit = (e) =>{
@@ -93,7 +94,7 @@ export function Login (){
       size='large'
       color='error'
       startIcon={<GoogleIcon/>}
-      onClick={() => {googleLogin()}}
+      onClick={googleLogin}
       >Entrar com Google
       </Button>
       </form>
