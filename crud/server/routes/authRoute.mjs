@@ -2,7 +2,7 @@ const sucessLoginUrl = "http://localhost:3000/crud";
 const failedLoginUrl = "http://localhost:3000/loginFailed";
 const router = express.Router();
 dotenv.config();
-
+app.use(cors())
 app.use(session( {
   secret: process.env.SECRET,
   saveUninitialized: false,
@@ -12,14 +12,6 @@ app.use(session( {
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.get('/login', (req, res) =>{
-  res.send('<a href="/auth/google">Autenticação com Google</a>')
-});
-
-router.get('/protected', isLoggedIn, (req, res) => {
-  res.send(`Olá, ${req.user.displayName}`);
-});
 
 router.get('/logout', (req, res) => {
   req.logOut();
@@ -34,7 +26,7 @@ passport.authenticate('google', { scope: ['email', 'profile'] })
 router.get('/google/callback',
   passport.authenticate('google', {
     successRedirect:  sucessLoginUrl,
-    failureRedirect: failedLoginUrl,
+    failureRedirect: failedLoginUrl
   }),
 );
 
