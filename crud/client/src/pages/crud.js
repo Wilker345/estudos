@@ -5,31 +5,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import '../Styles.css';
 import Axios from 'axios'
-
+import Create from '../components/create'
+import Check from '../components/check'
 
 export function Crud() {
-  const[cnpj, setCnpj] = useState('')
-  const[nome, setNome] = useState('')
   const[listaEmpresas, setListaEmpresas] = useState([])
   const[nomeNovo, setNomeNovo] = useState('')
-
+  const [delChek, setDelCheck] = React.useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/companies").then((response)=>{
       setListaEmpresas(response.data.data)
     })
   }, [])
-  const submitEmpresa = () => {
-    Axios.post("http://localhost:3001/companies", {
-      cnpj: cnpj,
-      name: nome,
-    });
-
-  setListaEmpresas([
-    ...listaEmpresas,
-    {name: nome, cnpj: cnpj}
-    ]);
-  };
 
   const deleteEmpresa = (empresa) => {
     Axios.delete(`http://localhost:3001/companies/delete/:${empresa}`);
@@ -46,46 +34,7 @@ export function Crud() {
   return (
     <Container>
     <div className="Crud">
-    <Typography
-    component="h1"
-    variant="h5"
-    >Crud para Empresas
-    </Typography>
-
-      <div className="form">
-      <TextField
-      sx={{
-        marginTop: 2,
-        marginBottom: 2,
-        display: 'block'
-        }}
-      onChange={(e) => setCnpj(e.target.value)}
-      label="CNPJ"
-      type='text'
-      variant="outlined"
-      required
-      />
-      <TextField
-      sx={{
-        marginTop: 2,
-        marginBottom: 2,
-        display: 'block'
-        }}
-      onChange={(e) => setNome(e.target.value)}
-      label="Nome da Empresa"
-      type='text'
-      variant="outlined"
-      required
-      />
-      <Button
-      sx={{
-        marginBottom: 1,
-        }}
-      variant='contained'
-      className='botaoEnviarEmpresa'
-      onClick={submitEmpresa}
-      >Criar
-      </Button>
+    <Create/>
       <Box sx={{ bgcolor: 'text.main' }}>
       <List>
         {listaEmpresas.map(val => (
@@ -111,8 +60,6 @@ export function Crud() {
       </List>
       </Box>
       </div>
-
-    </div>
     </Container>
   );
 }

@@ -17,15 +17,14 @@ function isLoggedIn(req, res, next) {
 app.use(cors())
 app.use(express.json())
 app.use("/companies", companyRoutes);
-/* app.use(express.urlencoded({
-  extended: true
-})); */
+
 
 //Sessão de login
 app.use(session( {
   secret: process.env.SECRET,
   saveUninitialized: false,
-  resave: true
+  resave: true,
+  cookie: { secure: 'auto'}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
