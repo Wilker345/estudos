@@ -11,7 +11,7 @@ import Check from '../components/check'
 export function Crud() {
   const[listaEmpresas, setListaEmpresas] = useState([])
   const[nomeNovo, setNomeNovo] = useState('')
-  const [delChek, setDelCheck] = React.useState(false);
+  const [del, setDel] = React.useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/companies").then((response)=>{
@@ -50,6 +50,9 @@ export function Crud() {
           onClick={() => {deleteEmpresa(val.cnpj)}}>
           <DeleteIcon/>
           </IconButton>
+
+          <Check/>
+
           <IconButton
           onClick={() => {mudarNomeEmpresa(val.cnpj)}}>
           <EditIcon/>

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Axios from 'axios';
 import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const style = {
   position: 'absolute',
@@ -21,16 +22,21 @@ const style = {
 
 export default function Check() {
   const [open, setOpen] = React.useState(false);
+  const [del, setDel] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [delChek, setDelCheck] = React.useState(false);
+  const handleDel = () => setDel(true);
+
   const deleteEmpresa = (empresa) => {
     Axios.delete(`http://localhost:3001/companies/delete/:${empresa}`);
   }
 
+
   return (
     <div>
-      <IconButton onClick={handleOpen}/>
+      <IconButton onClick={handleOpen}>
+      <DeleteIcon color='error'/>
+      </IconButton>
       <Modal
         open={open}
         onClose={handleClose}
@@ -44,7 +50,7 @@ export default function Check() {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Essa operação é irreversível, tem certeza?
           </Typography>
-          <Button variant='contained' onClick={setDelCheck(true)}
+          <Button variant='contained' onClick={handleDel}
           sx={{
             marginRight: 1,
             marginTop: 2
