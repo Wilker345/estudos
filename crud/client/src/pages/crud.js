@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {Typography, Container, Button, TextField} from '@mui/material';
 import {List, ListItem, ListItemIcon, IconButton, Box} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,11 +7,12 @@ import '../Styles.css';
 import Axios from 'axios'
 import Create from '../components/create'
 import Check from '../components/check'
+import { CheckContext } from '../context/checkContext';
 
 export function Crud() {
   const[listaEmpresas, setListaEmpresas] = useState([])
   const[nomeNovo, setNomeNovo] = useState('')
-  const [del, setDel] = React.useState(false);
+  const [del, setDel] = useContext(CheckContext)
 
   useEffect(() => {
     Axios.get("http://localhost:3001/companies").then((response)=>{
@@ -20,7 +21,10 @@ export function Crud() {
   }, [])
 
   const deleteEmpresa = (empresa) => {
-    Axios.delete(`http://localhost:3001/companies/delete/:${empresa}`);
+    if(del) {
+      Axios.delete(`http://localhost:3001/companies/delete/:${empresa}`);
+      setDel(false)
+    }
   }
 
   const mudarNomeEmpresa = (empresa) => {

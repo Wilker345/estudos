@@ -23,9 +23,15 @@ export default function Create() {
 
     if ( cnpj === ''){
       setCnpjError(true)
+      return
     }
     if ( nome === ''){
       setNomeError(true)
+      return
+    }
+    if (cnpj && nome) {
+      console.log(cnpj, nome)
+
     }
   }
 

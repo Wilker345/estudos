@@ -1,12 +1,12 @@
 //Deseja aplicar esta alteração? (update ou delete)
-import * as React from 'react';
+import React, {useContext} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Axios from 'axios';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { CheckContext } from '../context/checkContext';
 
 const style = {
   position: 'absolute',
@@ -22,15 +22,10 @@ const style = {
 
 export default function Check() {
   const [open, setOpen] = React.useState(false);
-  const [del, setDel] = React.useState(false);
+  const [del, setDel] = useContext(CheckContext)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleDel = () => setDel(true);
-
-  const deleteEmpresa = (empresa) => {
-    Axios.delete(`http://localhost:3001/companies/delete/:${empresa}`);
-  }
-
 
   return (
     <div>
