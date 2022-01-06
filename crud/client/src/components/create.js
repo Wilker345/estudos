@@ -25,16 +25,29 @@ export default function Create() {
       setCnpjError(true)
       return
     }
+    if (cnpj.length !== 14 ){
+      setCnpjError(true)
+      return
+    }
     if ( nome === ''){
       setNomeError(true)
       return
     }
-    if (cnpj && nome) {
-      console.log(cnpj, nome)
-
+    if (cnpj && nome === '') {
+      setCnpjError(true)
+      setNomeError(true)
+      return
     }
-  }
+    if (cnpj && nome) {
+      setCnpjError(false)
+      setNomeError(false)
+    }
+    Axios.post("http://localhost:3001/companies", {
+      cnpj: cnpj,
+      name: nome
+      }, handleClose())
 
+  }
   const style = {
     position: 'absolute',
     top: '50%',
@@ -42,17 +55,12 @@ export default function Create() {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    borderRadius: 4
   };
 
-  const submitEmpresa = () => {
-    Axios.post("http://localhost:3001/companies", {
-      cnpj: cnpj,
-      name: nome
-    },
-    handleClose())}
+
 
   return (
     <div>
@@ -101,7 +109,7 @@ export default function Create() {
           type='submit'
           variant='contained'
           className='botaoEnviarEmpresa'
-          onClick={submitEmpresa}
+          onClick={handleSubmit}
           >Criar
           </Button>
         </Box>

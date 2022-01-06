@@ -1,11 +1,10 @@
-import React, {useState, createContext, useEffect} from 'react'
+import React, {createContext} from 'react'
 export const CheckContext = createContext();
 
 export default function CheckProvider (props){
-  const [del, setDel] = useState(false);
 
   return(
-    <CheckContext.Provider value={del}>
+    <CheckContext.Provider>
       {props.children}
     </CheckContext.Provider>
   )
