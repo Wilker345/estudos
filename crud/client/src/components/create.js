@@ -64,7 +64,7 @@ export default function Create() {
 
   return (
     <div>
-      <Button variant='contained' onClick={handleOpen}>Criar</Button>
+      <Button variant='outlined' onClick={handleOpen}>Criar nova Empresa</Button>
       <form NoValidate autoComplete="off" onSubmit={handleSubmit}>
       <Modal
         open={open}
