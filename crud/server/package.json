@@ -20,6 +20,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
+    "openid-client": "^5.1.1",
     "passport": "^0.5.0",
     "passport-google-oauth": "^2.0.0",
     "passport-google-oauth2": "^0.2.0",

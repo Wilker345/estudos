@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import Axios from 'axios';
 import { useState } from 'react';
-
+import AddIcon from '@mui/icons-material/Add';
 
 export default function Create() {
   const [open, setOpen] = React.useState(false);
@@ -21,7 +21,7 @@ export default function Create() {
     setCnpjError(false)
     setNomeError(false)
 
-    if ( cnpj === ''){
+    if ( !cnpj ){
       setCnpjError(true)
       return
     }
@@ -29,11 +29,11 @@ export default function Create() {
       setCnpjError(true)
       return
     }
-    if ( nome === ''){
+    if ( !nome ){
       setNomeError(true)
       return
     }
-    if (cnpj && nome === '') {
+    if (!cnpj && !nome ) {
       setCnpjError(true)
       setNomeError(true)
       return
@@ -64,7 +64,7 @@ export default function Create() {
 
   return (
     <div>
-      <Button variant='outlined' onClick={handleOpen}>Criar nova Empresa</Button>
+      <Button variant='outlined' endIcon={<AddIcon/>}  onClick={handleOpen}>Criar nova Empresa</Button>
       <form NoValidate autoComplete="off" onSubmit={handleSubmit}>
       <Modal
         open={open}

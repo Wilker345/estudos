@@ -1,12 +1,9 @@
 //Deseja aplicar esta alteração? (update ou delete)
-import React, {useContext} from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import React from 'react';
+import {Box, Button, Typography, Modal} from '@mui/material'
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { CheckContext } from '../context/checkContext';
+import Axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -15,22 +12,24 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   p: 4,
   borderRadius: 4
 };
 
-export default function Check() {
+export default function Check({cnpj}) {
   const [open, setOpen] = React.useState(false);
-  const [del, setDel] = useContext(CheckContext)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleDel = () => setDel(true);
+  const empresa = cnpj;
+
+  async function handleDel(parametro){
+    await Axios.delete(`http://localhost:3001/companies/delete/:${parametro}`);
+  }
 
   return (
     <div>
       <IconButton onClick={handleOpen}>
-      <DeleteIcon color='error'/>
+      <DeleteIcon/>
       </IconButton>
       <Modal
         open={open}
@@ -45,7 +44,7 @@ export default function Check() {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Essa operação é irreversível, tem certeza?
           </Typography>
-          <Button variant='contained' onClick={handleDel}
+          <Button variant='contained' onClick={() => handleDel(empresa) && handleClose()}
           sx={{
             marginRight: 1,
             marginTop: 2

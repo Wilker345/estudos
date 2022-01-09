@@ -36,7 +36,8 @@ companyRoutes.delete("/delete/:cnpj", async (req, res) => {
 
 companyRoutes.patch("/patch/:cnpj", async (req, res) => {
   try {
-    const company = await Company.findByPk(req.body.cnpj);
+    //console.log(req.body.cnpj) estava recebendo um objeto com parametro empresa
+    const company = await Company.findByPk(req.body.cnpj.empresa);
     await company.update(req.body);
   } catch (e) {
     console.log(e);

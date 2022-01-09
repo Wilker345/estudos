@@ -1,14 +1,13 @@
 import { useHistory } from 'react-router';
 import React from "react";
 import { useState } from 'react';
-import Axios from 'axios';
 import {Typography, Container, Button, TextField} from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-
+import '../Styles.css';
 
 export function Login (){
   const[email, setEmail] = useState('')
@@ -19,7 +18,7 @@ export function Login (){
 
   const history = useHistory();
   function aoCrud() {
-    history.push('/crud');
+    history.push('/table');
   };
   const googleLogin = async () => {
     const googleLoginURL = 'http://localhost:3001/auth/google'

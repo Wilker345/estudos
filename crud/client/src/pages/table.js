@@ -9,8 +9,9 @@ import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import TablePagination from '@mui/material/TablePagination';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableFooter, Paper, IconButton, Box} from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Check from '../components/check';
+import Update from '../components/update';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -80,9 +81,6 @@ export default function GridTable() {
       setListaEmpresas(response.data.data)
     })
   }, [])
-  const deleteEmpresa = (empresa) => {
-      Axios.delete(`http://localhost:3001/companies/delete/:${empresa}`);
-  }
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -125,12 +123,8 @@ export default function GridTable() {
                 {empresa.name}
               </TableCell>
               <TableCell>
-              <IconButton onClick={() => {deleteEmpresa(empresa.cnpj)}}>
-                <DeleteIcon/>
-              </IconButton>
-              <IconButton>
-                <EditIcon/>
-              </IconButton>
+              <Check cnpj={empresa.cnpj}/>
+              <Update empresa={empresa.cnpj}/>
               </TableCell>
             </TableRow>
           ))}
