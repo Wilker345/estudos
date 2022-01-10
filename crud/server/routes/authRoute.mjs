@@ -1,4 +1,4 @@
-const sucessLoginUrl = "http://localhost:3000/crud";
+const sucessLoginUrl = "http://localhost:3000/table";
 const failedLoginUrl = "http://localhost:3000/loginFailed";
 const router = express.Router();
 
@@ -20,6 +20,6 @@ router.get('/google/callback',
   }),
 );
 
-router.get('/auth/failure', (req, res) => {
+router.get('/loginFailed', (req, res) => {
   res.send('erro com o login');
 });
